@@ -1,0 +1,17 @@
+name: Notify nvidia-installer repo on release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  notify-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send repository dispatch to nvidia installer repo
+        uses: repository-dispatch@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: gardenlinux/gardenlinux-nvidia-installer
+          event-type: release-published
+          client-payload: '{"version": "${{ github.event.release.tag_name }}"}'
