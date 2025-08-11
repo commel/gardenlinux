@@ -9,9 +9,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send repository dispatch to nvidia installer repo
-        uses: repository-dispatch@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          repository: gardenlinux/gardenlinux-nvidia-installer
-          event-type: release-published
-          client-payload: '{"version": "${{ github.event.release.tag_name }}"}'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=${{ github.event.release.tag_name }}
+
+          curl -X POST https://api.github.com/gardenlinux/gardenlinux-nvidia-installer/dispatches \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -d '{"event_type": "release-published", "client_payload": {"version": "'"$VERSION"'"}}'    
