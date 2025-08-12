@@ -21,7 +21,7 @@ jobs:
         run: |
           VERSION=${{ github.event.release.tag_name }}
 
-          curl -X POST https://api.github.com/gardenlinux/gardenlinux-nvidia-installer/dispatches \
+          curl -X POST https://api.github.com/repos/gardenlinux/gardenlinux-nvidia-installer/dispatches \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             -d '{"event_type": "release-published", "client_payload": {"version": "'"$VERSION"'"}}'    
