@@ -3,6 +3,13 @@ name: Notify nvidia-installer repo on release
 on:
   release:
     types: [published]
+  
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: 'Release Tags'
+        required: false
+        type: boolean
 
 jobs:
   notify-repo:
