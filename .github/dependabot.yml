@@ -29,7 +29,6 @@ updates:
     directory: "/tests-ng/util/tf/"
     schedule:
       interval: "weekly"
-    versioning-strategy: "increase-if-necessary"
     ignore:
       - dependency-name: "hashicorp/azurerm"
     assignees:
